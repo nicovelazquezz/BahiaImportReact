@@ -101,8 +101,7 @@ const products = [
 ]
 
 
-export const getProducts = (categoryId) => {
-    
+export const getProducts = () => {    
     return new Promise( (resolve) => {
         setTimeout(() => {
             resolve(products)
