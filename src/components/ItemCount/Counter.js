@@ -1,18 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMinusCircle, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
-import { useState } from 'react'
+import { useContext } from 'react'
+import { CartContext } from '../../context/CartContext'
 
 function Counter(stock) {
 
-    const [count, setCount] = useState(1)
-
-    const decrement = () => {
-        setCount(actual => actual - 1)
-    }
-    
-    const increment = () => {
-        setCount(actual => actual + 1)  
-    }
+    const { count, setCount, decrement, increment } = useContext(CartContext)
 
     return (
         <div className="flex items-center border rounded-sm border-gray-900/30">

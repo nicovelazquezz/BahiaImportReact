@@ -7,7 +7,6 @@ import { useParams } from "react-router-dom";
 function ItemDetailContainer() {
   const [product, setProduct] = useState()
 
-
   const { productId } = useParams()
   
   const [loading, setLoading] = useState(true)
@@ -20,6 +19,8 @@ function ItemDetailContainer() {
       })
   }, [productId])
 
+  
+
 
 
   if (loading) {
@@ -28,7 +29,7 @@ function ItemDetailContainer() {
 
   return (
     <ItemDetail 
-    product={product}    
+      product={product}    
     />
   )
 }

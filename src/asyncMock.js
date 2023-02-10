@@ -1,20 +1,3 @@
-import img1 from './images/product-1.jpg'
-import img1full from './images/product-1-full.jpg'
-import img2 from './images/product-2.jpg'
-import img2full from './images/product-2-full.jpg'
-import img3 from './images/product-3.jpg'
-import img3full from './images/product-3-full.jpg'
-import img4 from './images/product-4.jpg'
-import img4full from './images/product-4-full.jpg'
-import img5 from './images/product-5.jpg'
-import img5full from './images/product-5-full.jpg'
-import img6 from './images/product-6.jpg'
-import img6full from './images/product-6-full.jpg'
-import img7 from './images/product-7.jpg'
-import img7full from './images/product-7-full.jpg'
-import img8 from './images/product-8.jpg'
-import img8full from './images/product-8-full.jpg'
-
 const description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
 
 const products = [
@@ -25,8 +8,8 @@ const products = [
             price: 300,
             description: description,
             stock: 15,
-            img: img1,
-            full: img1full           
+            img: '../images/product-1.jpg',
+            full: '../images/product-1-full.jpg'           
         },
         {
             id: '2',
@@ -35,8 +18,8 @@ const products = [
             price: 200,
             description: description,
             stock: 20,
-            img: img2,
-            full: img2full  
+            img: '../images/product-2.jpg',
+            full: '../images/product-2-full.jpg'  
         },
         {
             id: '3',
@@ -45,8 +28,8 @@ const products = [
             price: 990,
             description: description,
             stock: 5,
-            img: img3,
-            full: img3full  
+            img: '../images/product-3.jpg',
+            full: '../images/product-3-full.jpg'  
         },
         {
             id: '4',
@@ -55,8 +38,8 @@ const products = [
             price: 750,
             description: description,
             stock: 10,
-            img: img4,
-            full: img4full  
+            img: '../images/product-4.jpg',
+            full: '../images/product-4-full.jpg'  
         },
         {
             id: '5',
@@ -65,8 +48,8 @@ const products = [
             price: 750,
             description: description,
             stock: 10,
-            img: img5,
-            full: img5full  
+            img: '../images/product-5.jpg',
+            full: '../images/product-5-full.jpg'  
         },
         {
             id: '6',
@@ -75,8 +58,8 @@ const products = [
             price: 300,
             description: description,
             stock: 5,
-            img: img6,
-            full: img6full  
+            img: '../images/product-6.jpg',
+            full: '../images/product-6-full.jpg' 
         },
         {
             id: '7',
@@ -85,8 +68,8 @@ const products = [
             price: 1500,
             description: description,
             stock: 3,
-            img: img7,
-            full: img7full  
+            img: '../images/product-7.jpg',
+            full: '../images/product-7-full.jpg'  
         },
         {
             id: '8',
@@ -95,8 +78,8 @@ const products = [
             price: 1750,
             description: description,
             stock: 5,
-            img: img8,
-            full: img8full  
+            img: '../images/product-8.jpg',
+            full: '../images/product-8-full.jpg'  
         }
 ]
 

@@ -1,7 +1,12 @@
+import { useContext } from "react"
 import CartWidget from "../CartWidget/CartWidget"
 import { Link } from "react-router-dom"
+import { CartContext } from "../../context/CartContext"
 
 function NavBar() {
+
+    const { totalQuantity } = useContext(CartContext)
+
     return (
         <nav className="flex items-center justify-between flex-wrap bg-gray-900 p-6">
             <div className="flex items-center flex-shrink-0 text-gray-500 ">
@@ -25,7 +30,7 @@ function NavBar() {
                     </Link>
                 </div>
             </div>
-            <CartWidget/>
+            <CartWidget totalQuantity={totalQuantity} />
         </nav>
     )
     }

@@ -66,7 +66,7 @@ function ItemDetail({product}) {
                         </div>
                         </div>
                         {/* CONTADOR */}
-                        <ItemCount stock={stock} />
+                        <ItemCount stock={stock} product={product} />
                         {/* FIN CONTADOR */}
                         <div className='pt-8 text-gray-700'>
                             » Envío entre 2-5 días hábiles • 30 días de garantía! «

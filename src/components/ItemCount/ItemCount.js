@@ -1,11 +1,29 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { CartContext } from '../../context/CartContext'
 import Counter from './Counter'
 
 
-function ItemCount({stock}) {
+function ItemCount({stock, product}) {
+
+  const { name, price, id } = product
 
   const [goToCart, setGoToCart ]= useState(false)
+
+  const { quantity, setCart, cart } = useContext(CartContext);
+  
+  
+  const onAdd = () => {    
+    setCart(prev => [...prev, {name, price, id, quantity}])    
+    console.log(cart)   
+  }
+
+
+
+  const si = () => {
+    console.log('si')
+  }
+  
 
   return (
     <>
@@ -16,14 +34,14 @@ function ItemCount({stock}) {
               <Counter 
                 stock={stock}        
               />
-              <button onClick={ () => setGoToCart(true) } className='py-4 text-sm font-bold text-white uppercase bg-violet-500 rounded-sm px-14 hover:bg-violet-700'>
+              <button onClick={ () => {setGoToCart(true); onAdd();} } className='py-4 text-sm font-bold text-white uppercase bg-violet-500 rounded-sm px-14 hover:bg-violet-700'>
                   Agregar al carrito
               </button>    
             </>
           : 
           <div className='w-full'>
             <Link to='/cart'>
-              <button className='py-4 w-full text-m font-bold text-white uppercase bg-green-500 rounded-sm px-14 hover:bg-green-700'>
+              <button onClick={si} className='py-4 w-full text-m font-bold text-white uppercase bg-green-500 rounded-sm px-14 hover:bg-green-700'>
                   Finalizar Compra
               </button>          
             </Link>
