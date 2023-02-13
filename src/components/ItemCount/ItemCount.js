@@ -8,14 +8,14 @@ function ItemCount({stock, product}) {
 
   const { name, price, id } = product
 
-  const [goToCart, setGoToCart ]= useState(false)
+  const [ goToCart, setGoToCart ]= useState(false)
 
-  const { quantity, setCart, cart } = useContext(CartContext);
+  const { quantity, setCart, cart, setCount } = useContext(CartContext);
   
   
   const onAdd = () => {    
     setCart(prev => [...prev, {name, price, id, quantity}])    
-    console.log(cart)   
+    setCount(1)   
   }
 
 

@@ -1,7 +1,9 @@
-import { getProducts, getProductsByCategory } from "../../asyncMock";
+// import { getProducts, getProductsByCategory } from "../../asyncMock";
 import { useEffect, useState } from "react";
 import ItemList from "../ItemList/ItemList";
 import { useParams } from "react-router-dom";
+import { db } from "../../services/firebase/firebaseConfig";
+import { getDocs, collection, query, where } from "firebase/firestore";
 
 
 function ItemListContainer({greeting}) {
@@ -11,15 +13,33 @@ function ItemListContainer({greeting}) {
     
     
     useEffect(() => {
-        const asyncFunction = categoryId ? getProductsByCategory : getProducts
+        // Para filtrar se utiliza query, indica que tiene condiciones la busqueda, y where establecemos esas condiciones
+        const collectionRef = categoryId 
+        ? query(collection(db, 'products'), where('category', '==', categoryId))        
+        : collection(db, 'products')
+
+        getDocs(collectionRef).then(response => {
+            const productsAdapted = response.docs.map( doc => {
+                const data = doc.data()
+                return { id: doc.id, ...data }
+            })
+
+            setProducts(productsAdapted)
+        }).catch(
+            console.log('no se pudieron cargar los productos')
+        )
+
+
+
+        // const asyncFunction = categoryId ? getProductsByCategory : getProducts
         
-        asyncFunction(categoryId)
-            .then(products => {
-                setProducts(products)
-                })
-            .catch(error => {
-                    console.log(error)
-                })
+        // asyncFunction(categoryId)
+        //     .then(products => {
+        //         setProducts(products)
+        //         })
+        //     .catch(error => {
+        //             console.log(error)
+        //         })
     }, [categoryId])
 
     
