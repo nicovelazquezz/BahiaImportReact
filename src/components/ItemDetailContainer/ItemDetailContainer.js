@@ -14,7 +14,6 @@ function ItemDetailContainer() {
   
 
   useEffect(() => {
-
     const docRef = doc(db, 'products', productId)
     getDoc(docRef).then(doc => {
       const dataProduct = doc.data()
@@ -27,13 +26,6 @@ function ItemDetailContainer() {
     .finally(() => {
           setLoading(false)
       })
-
-
-      // getProductById(productId).then(response => {
-      //     setProduct(response)
-      // }).finally(() => {
-      //     setLoading(false)
-      // })
   }, [productId])
 
   

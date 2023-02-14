@@ -1,14 +1,32 @@
-import React from 'react'
+import { Link } from "react-router-dom"
+import { useContext } from "react"
+import { CartContext } from "../../context/CartContext"
 
 function Cart() {
+
+  const { cart, total } = useContext(CartContext)
+
   return (
-    <div className='w-100 flex justify-center text-center '>
-      <div className='w-1/2 text-white bg-red-700 p-10 text-4xl mt-10'>
-              Disculpe. Estamos trabajando.
-              <br></br>              
-              Carrito en construcción.              
-      </div>
-    </div>
+    <>
+        { cart.map( prod => (
+          <div key={prod.id}>
+            <table className="u-full-width">
+                <thead>
+                  <tr>                
+                    <th>{prod.name}</th>
+                    <th>{prod.price}</th>
+                    <th>{total}</th>
+                    <th></th>
+                  </tr>
+                </thead>
+            
+            </table>
+          </div>
+        ))
+        }
+
+        <Link to='/checkout'>Checkout</Link>
+    </>
   )
 }
 

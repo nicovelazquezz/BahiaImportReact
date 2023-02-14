@@ -25,25 +25,8 @@ function ItemListContainer({greeting}) {
             })
 
             setProducts(productsAdapted)
-        }).catch(
-            console.log('no se pudieron cargar los productos')
-        )
-
-
-
-        // const asyncFunction = categoryId ? getProductsByCategory : getProducts
-        
-        // asyncFunction(categoryId)
-        //     .then(products => {
-        //         setProducts(products)
-        //         })
-        //     .catch(error => {
-        //             console.log(error)
-        //         })
+        })
     }, [categoryId])
-
-    
-    
 
     return (
         <>

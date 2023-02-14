@@ -4,23 +4,22 @@ import { CartContext } from '../../context/CartContext'
 import Counter from './Counter'
 
 
-function ItemCount({stock, product}) {
+function ItemCount({ stock, product }) {
 
   const { name, price, id } = product
 
   const [ goToCart, setGoToCart ]= useState(false)
 
-  const { quantity, setCart, cart, setCount } = useContext(CartContext);
+  const { quantity, setCart, setCount } = useContext(CartContext);
   
   
   const onAdd = () => {    
     setCart(prev => [...prev, {name, price, id, quantity}])    
     setCount(1)   
   }
+  
 
-
-
-  const si = () => {
+  const handleFinish = () => {
     console.log('si')
   }
   
@@ -41,7 +40,7 @@ function ItemCount({stock, product}) {
           : 
           <div className='w-full'>
             <Link to='/cart'>
-              <button onClick={si} className='py-4 w-full text-m font-bold text-white uppercase bg-green-500 rounded-sm px-14 hover:bg-green-700'>
+              <button onClick={handleFinish} className='py-4 w-full text-m font-bold text-white uppercase bg-green-500 rounded-sm px-14 hover:bg-green-700'>
                   Finalizar Compra
               </button>          
             </Link>
