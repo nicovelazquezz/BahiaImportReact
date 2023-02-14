@@ -6,6 +6,13 @@ function Cart() {
 
   const { cart, total } = useContext(CartContext)
 
+  if(cart.length === 0)
+  {
+    return (
+      <h1>No hay productos en el carrito</h1>
+    )
+  }
+
   return (
     <>
         { cart.map( prod => (

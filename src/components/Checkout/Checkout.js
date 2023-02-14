@@ -1,13 +1,16 @@
 import { collection, query, where, documentId, getDocs, writeBatch, addDoc } from 'firebase/firestore'
 import { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { CartContext } from '../../context/CartContext'
 import { db } from '../../services/firebase/firebaseConfig'
 
 function Checkout() {
-
+  
   const [loading, setLoading] = useState(false)
   const { cart, total, clearCart } = useContext(CartContext)
   const [orderId, setOrderId] = useState('')
+
+  const navigate = useNavigate()
 
   const createOrder = async () => {
     setLoading(true)  
@@ -24,8 +27,7 @@ function Checkout() {
   
       const batch = writeBatch(db)
   
-      const ids = cart.map( prod => prod.id)
-      console.log(ids)
+      const ids = cart.map( prod => prod.id)      
   
       const productsRef = query(collection(db, 'products'), where(documentId(), 'in', ids)) 
   
@@ -55,9 +57,15 @@ function Checkout() {
         const orderAdded = await addDoc(orderRef, objOrder)
   
         const { id } = orderAdded
+
         setOrderId(id)
+
         clearCart()
-        console.log(id)
+
+        setTimeout(() => {
+          navigate('/')
+        }, 5000);
+        
 
       } else {
         console.log('Hay Productos fuera de stock')
@@ -69,15 +77,22 @@ function Checkout() {
     } 
   }
   
-  if (loading) {
+  if(loading){
     return <h1>Generando orden</h1>
   }
 
-  if (orderId) {
+  if(orderId){
     return (
       <div>
         <h1>El id de su compra es {orderId}</h1>
       </div>)
+  }
+
+  if(cart.length === 0)
+  {
+    return (
+      <h1>No hay productos en el carrito</h1>
+    )
   }
 
   return (  
