@@ -12,14 +12,14 @@ function Checkout() {
 
   const navigate = useNavigate()
 
-  const createOrder = async () => {
+  const createOrder = async (name, phone, email) => {
     setLoading(true)  
     try {
       const objOrder = {
         buyer: {
-          name: 'Nicolas Velazquez',
-          phone: '2914231087',
-          mail: 'nv_velazquez@hotmail.com'
+          name,
+          phone,
+          email
         },
         items: cart,
         total
@@ -88,16 +88,11 @@ function Checkout() {
       </div>)
   }
 
-  if(cart.length === 0)
-  {
-    return (
-      <h1>No hay productos en el carrito</h1>
-    )
-  }
 
   return (  
   <>
     <div>
+      <form onGenerateOrder={createOrder}> </form>
       <button onClick={createOrder}>Finalizar compra </button>
     </div>
   </>

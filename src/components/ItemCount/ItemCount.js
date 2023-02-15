@@ -6,7 +6,7 @@ import Counter from './Counter'
 
 function ItemCount({ stock, product }) {
 
-  const { name, price, id } = product
+  const { name, price, id, img, category} = product
 
   const [ goToCart, setGoToCart ]= useState(false)
 
@@ -14,11 +14,11 @@ function ItemCount({ stock, product }) {
   
   
   const onAdd = () => {    
-    setCart(prev => [...prev, {name, price, id, quantity}])    
+    setCart(prev => [...prev, {name, price, id, quantity, img, category}])    
     setCount(1)   
   }
   
-
+  
   const handleFinish = () => {
     console.log('si')
   }
@@ -33,7 +33,7 @@ function ItemCount({ stock, product }) {
               <Counter 
                 stock={stock}        
               />
-              <button onClick={ () => {setGoToCart(true); onAdd();} } className='py-4 text-sm font-bold text-white uppercase bg-violet-500 rounded-sm px-14 hover:bg-violet-700'>
+              <button onClick={ () => {setGoToCart(true); onAdd()} } className='py-4 text-sm font-bold text-white uppercase bg-violet-500 rounded-sm px-14 hover:bg-violet-700'>
                   Agregar al carrito
               </button>    
             </>
