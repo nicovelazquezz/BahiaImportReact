@@ -35,6 +35,7 @@ function ItemCount({ stock, product }) {
     }
   }
   
+  
 
   
   const handleFinish = () => {

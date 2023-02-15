@@ -1,22 +1,43 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 
 function ItemCart({ prod, eliminarProducto }) {
     const { price, name, img, category, quantity, id } = prod;
 
-    const { decrement, increment, setCount, count, setQuantity} = useContext(CartContext);
-    
-    const decrementQua = () => {
-        setQuantity(actual => actual - 1)  
-        console.log(quantity)
-    }
-    
-    const incrementQua = () => {
-        setQuantity(actual => actual + 1) 
-        console.log(quantity) 
-    }
+    const { setQuantity, setCart } = useContext(CartContext);
+
+    const handleIncrement = () => {
+        const newQuantity = quantity + 1;
+        setQuantity(newQuantity);
+        setCart(prevCart => {
+            const updatedCart = prevCart.map(item => {
+                if (item.id === id) {
+                    return { ...item, quantity: newQuantity };
+                }
+                return item;
+            });
+            return updatedCart;
+        });
+    };
+
+    const handleDecrement = () => {
+        if (quantity > 1) {
+            const newQuantity = quantity - 1;
+            setQuantity(newQuantity);
+            setCart(prevCart => {
+                const updatedCart = prevCart.map(item => {
+                    if (item.id === id) {
+                        return { ...item, quantity: newQuantity };
+                    }
+                    return item;
+                });
+                return updatedCart;
+            });
+        }
+    };
+
 
 
     return (
@@ -41,11 +62,11 @@ function ItemCart({ prod, eliminarProducto }) {
             </div>
             </div>
             <div className="flex justify-center w-1/5">
-                <button className="p-4" onClick={incrementQua}>
+                <button className="p-4" onClick={handleIncrement}>
                     <FontAwesomeIcon icon={faPlusCircle} />
                 </button>
-                <input value={quantity} onChange={(e) => setQuantity(e.target.value)} className="w-16 h-full text-center outline-none"/>
-                <button className="p-4" onClick={decrementQua}>
+                <input value={quantity} onChange={(e) => setQuantity(parseInt(e.target.value))} className="w-16 h-full text-center outline-none"/>
+                <button className="p-4" onClick={handleDecrement}>
                     <FontAwesomeIcon icon={faMinusCircle} />
                 </button>
             </div>

@@ -1,37 +1,129 @@
-import {
-  collection,
-  query,
-  where,
-  documentId,
-  getDocs,
-  writeBatch,
-  addDoc,
-} from "firebase/firestore";
+import { collection, query, where, documentId, getDocs, writeBatch, addDoc } from "firebase/firestore";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../../context/CartContext";
 import { db } from "../../services/firebase/firebaseConfig";
 
 function Checkout() {
+
   const [loading, setLoading] = useState(false);
   const { cart, total, clearCart } = useContext(CartContext);
   const [orderId, setOrderId] = useState("");
+  const [objOrder, setObjOrder] = useState({
+    buyer: {
+      name: "",
+      email: "",
+      address: "",
+      city: "",
+      country: "",
+      postalCode: ""
+    }
+  });
+  
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+
+  function handleNameChange(event) {
+    setName(event.target.value);
+    setObjOrder(prevState => {
+      return {
+        ...prevState,
+        buyer: {
+          ...prevState.buyer,
+          name: event.target.value
+        }
+      }
+    });
+  }
+  
+  function handleEmailChange(event) {
+    setEmail(event.target.value);
+    setObjOrder(prevState => {
+      return {
+        ...prevState,
+        buyer: {
+          ...prevState.buyer,
+          email: event.target.value
+        }
+      }
+    });
+  }
+  
+  function handleAddressChange(event) {
+    setAddress(event.target.value);
+    setObjOrder(prevState => {
+      return {
+        ...prevState,
+        buyer: {
+          ...prevState.buyer,
+          address: event.target.value
+        }
+      }
+    });
+  }
+  
+  function handleCityChange(event) {
+    setCity(event.target.value);
+    setObjOrder(prevState => {
+      return {
+        ...prevState,
+        buyer: {
+          ...prevState.buyer,
+          city: event.target.value
+        }
+      }
+    });
+  }
+  
+  function handleCountryChange(event) {
+    setCountry(event.target.value);
+    setObjOrder(prevState => {
+      return {
+        ...prevState,
+        buyer: {
+          ...prevState.buyer,
+          country: event.target.value
+        }
+      }
+    });
+  }
+  
+  function handlePostalCodeChange(event) {
+    setPostalCode(event.target.value);
+    setObjOrder(prevState => {
+      return {
+        ...prevState,
+        buyer: {
+          ...prevState.buyer,
+          postalCode: event.target.value
+        }
+      }
+    });
+  }
 
   const navigate = useNavigate();
 
-  const createOrder = async (name, phone, email) => {
+  const createOrder = async (objOrder) => {
     setLoading(true);
     try {
       const objOrder = {
         buyer: {
           name,
-          phone,
           email,
+          address,
+          city,
+          country,
+          postalCode
         },
         items: cart,
         total,
       };
-
+      console.log(objOrder)
+      
       const batch = writeBatch(db);
 
       const ids = cart.map((prod) => prod.id);
@@ -102,12 +194,12 @@ function Checkout() {
       <div>
         <div className="min-h-screen p-4 bg-gray-200 leading-loose">
           <div className="flex justify-center">
-            <form className="max-w-lg m-6 p-4 bg-white rounded shadow-xl w-1/2">
+            <form onSubmit={createOrder} className="max-w-lg m-6 p-4 bg-white rounded shadow-xl w-1/2">
               <p className="text-gray-800 font-semibold pb-2 text-center">
                 Formulario de compra
               </p>
               <div className="">
-                <label className="block text-sm text-gray-600 p-1" for="name">
+                <label className="block text-sm text-gray-600 p-1" htmlFor="name">
                   Nombre
                 </label>
                 <input
@@ -118,10 +210,12 @@ function Checkout() {
                   required=""
                   placeholder="Ingresá tu nombre"
                   aria-label="Name"
+                  value={objOrder.buyer.name}
+                  onChange={handleNameChange}
                 />
               </div>
               <div className="mt-2">
-                <label className="block text-sm text-gray-600 p-1" for="email">
+                <label className="block text-sm text-gray-600 p-1" htmlFor="email">
                   Email
                 </label>
                 <input
@@ -132,69 +226,79 @@ function Checkout() {
                   required=""
                   placeholder="Ingresá tu email"
                   aria-label="Email"
+                  value={objOrder.buyer.email}
+                  onChange={handleEmailChange}
                 />
               </div>
               <div className="mt-2">
-                <label className=" block text-sm text-gray-600 p-1" for="email">
+                <label className=" block text-sm text-gray-600 p-1" htmlFor="adress">
                   Dirección
                 </label>
                 <input
                   className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
-                  id="email"
-                  name="email"
+                  id="address"
+                  name="address"
                   type="text"
                   required=""
                   placeholder="Direccíon"
-                  aria-label="Email"
+                  aria-label="adress"
+                  value={objOrder.buyer.adress}
+                  onChange={handleAddressChange}
                 />
               </div>
               <div className="mt-2">
-                <label className=" text-sm block text-gray-600 p-1" for="email">
+                <label className=" text-sm block text-gray-600 p-1" htmlFor="city">
                   Ciudad
                 </label>
                 <input
                   className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
-                  id="email"
-                  name="email"
+                  id="city"
+                  name="city"
                   type="text"
                   required=""
                   placeholder="Ciudad"
-                  aria-label="Email"
+                  aria-label="city"
+                  value={objOrder.buyer.city}
+                  onChange={handleCityChange}
                 />
               </div>
               <div className="inline-block mt-2 w-1/2 pr-1">
-                <label className=" block text-sm text-gray-600 p-1" for="email">
+                <label className=" block text-sm text-gray-600 p-1" htmlFor="country">
                   País
                 </label>
                 <input
                   className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
-                  id="email"
-                  name="email"
+                  id="country"
+                  name="country"
                   type="text"
                   required=""
                   placeholder="País"
-                  aria-label="Email"
+                  aria-label="country"
+                  value={objOrder.buyer.country}
+                  onChange={handleCountryChange}
                 />
               </div>
               <div className="inline-block mt-2 -mx-1 pl-1 w-1/2">
-                <label className=" block text-sm text-gray-600 p-1" for="email">
+                <label className=" block text-sm text-gray-600 p-1" htmlFor="zip">
                   Código postal
                 </label>
                 <input
                   className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
-                  id="email"
-                  name="email"
+                  id="zip"
+                  name="zip"
                   type="text"
                   required=""
                   placeholder="Código postal"
-                  aria-label="Email"
+                  aria-label="zip"
+                  value={objOrder.buyer.postalCode}
+                  onChange={handlePostalCodeChange}
                 />
               </div>
               <p className="mt-4 text-gray-800 font-medium">
                 Información de pago
               </p>
               <div>
-                <label className="block text-sm text-gray-600 p-1" for="name">
+                <label className="block text-sm text-gray-600 p-1" htmlFor="name">
                   Tarjeta
                 </label>
                 <input
