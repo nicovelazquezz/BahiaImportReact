@@ -24,7 +24,7 @@ export function CartProvider({children}) {
     useEffect(() => {
         setQuantity(count)
     }, [count])
-    
+
     
     const getTotalQuantity = () => {
         let accu = 0

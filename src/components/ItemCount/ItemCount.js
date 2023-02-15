@@ -27,7 +27,7 @@ function ItemCount({ stock, product }) {
         }
       });
   
-      setCart(newCart);
+      setCart(newCart);      
     } else {
       // Si el producto no está en el carrito, agregarlo
       setCart(prev => [...prev, {name, price, id, quantity, img, category}])    

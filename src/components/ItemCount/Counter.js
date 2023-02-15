@@ -19,7 +19,7 @@ function Counter(stock) {
         </button>      
         }        
 
-        <input value={count} type="number" onChange={e => setCount(e.target.value)} className="w-16 h-full text-center outline-none"></input>
+        <input value={count} onChange={e => setCount(e.target.value)} className="w-16 h-full text-center outline-none"></input>
 
         { count >= stock.stock ? 
         <button disabled className='p-4 opacity-25'>

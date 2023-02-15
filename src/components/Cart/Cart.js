@@ -15,6 +15,7 @@ function Cart() {
     const newCart = cart.filter((prod) => prod.id !== idProductoAEliminar);
     setCart(newCart);
   };
+ 
 
   if (cart.length === 0) {
     return <h1>No hay productos en el carrito</h1>;
@@ -78,7 +79,7 @@ function Cart() {
               <span className="font-semibold text-sm uppercase">
                 Items {cart.length}
               </span>
-              <span className="font-semibold text-sm">{total}</span>
+              
             </div>
             <div>
               <label className="font-medium inline-block mb-3 text-sm uppercase">
