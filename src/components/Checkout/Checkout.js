@@ -107,7 +107,7 @@ function Checkout() {
 
   const navigate = useNavigate();
 
-  const createOrder = async (objOrder) => {
+  const createOrder = async () => {
     setLoading(true);
     try {
       const objOrder = {
@@ -122,8 +122,7 @@ function Checkout() {
         items: cart,
         total,
       };
-      console.log(objOrder)
-      
+            
       const batch = writeBatch(db);
 
       const ids = cart.map((prod) => prod.id);

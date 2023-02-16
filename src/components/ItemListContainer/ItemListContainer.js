@@ -4,15 +4,18 @@ import ItemList from "../ItemList/ItemList";
 import { useParams } from "react-router-dom";
 import { db } from "../../services/firebase/firebaseConfig";
 import { getDocs, collection, query, where } from "firebase/firestore";
+import { useAsync } from "../../hooks/useAsync";
 
 
 function ItemListContainer({greeting}) {
     const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true)
 
     const { categoryId } = useParams();
     
     
     useEffect(() => {
+        setLoading(true)
         // Para filtrar se utiliza query, indica que tiene condiciones la busqueda, y where establecemos esas condiciones
         const collectionRef = categoryId 
         ? query(collection(db, 'products'), where('category', '==', categoryId))        
@@ -25,8 +28,18 @@ function ItemListContainer({greeting}) {
             })
 
             setProducts(productsAdapted)
+        }).catch(error => {
+            console.log(error)
+        }).finally(() => {
+            setLoading(false)
         })
+
     }, [categoryId])
+
+    if(loading) {
+        return <h1>Cargando productos...</h1>
+    }
+
 
     return (
         <>
