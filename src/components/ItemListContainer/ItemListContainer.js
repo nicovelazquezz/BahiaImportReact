@@ -1,43 +1,24 @@
 // import { getProducts, getProductsByCategory } from "../../asyncMock";
-import { useEffect, useState } from "react";
 import ItemList from "../ItemList/ItemList";
 import { useParams } from "react-router-dom";
-import { db } from "../../services/firebase/firebaseConfig";
-import { getDocs, collection, query, where } from "firebase/firestore";
 import { useAsync } from "../../hooks/useAsync";
+import { getProducts } from "../../services/firebase/firestore/products";
 
 
 function ItemListContainer({greeting}) {
-    const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true)
-
     const { categoryId } = useParams();
-    
-    
-    useEffect(() => {
-        setLoading(true)
-        // Para filtrar se utiliza query, indica que tiene condiciones la busqueda, y where establecemos esas condiciones
-        const collectionRef = categoryId 
-        ? query(collection(db, 'products'), where('category', '==', categoryId))        
-        : collection(db, 'products')
 
-        getDocs(collectionRef).then(response => {
-            const productsAdapted = response.docs.map( doc => {
-                const data = doc.data()
-                return { id: doc.id, ...data }
-            })
+    const getProductsWithCategory = () => getProducts(categoryId)    
 
-            setProducts(productsAdapted)
-        }).catch(error => {
-            console.log(error)
-        }).finally(() => {
-            setLoading(false)
-        })
-
-    }, [categoryId])
+    // Estoy renombrando data como products
+    const { data: products, error, loading } = useAsync(getProductsWithCategory, [categoryId])
 
     if(loading) {
         return <h1>Cargando productos...</h1>
+    }
+
+    if(error) {
+        return <h1>Hubo un error al cargar los productos.</h1>
     }
 
 

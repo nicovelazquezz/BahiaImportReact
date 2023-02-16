@@ -27,11 +27,12 @@ export const useAsync = (asyncFunc, dependencies = []) => {
             })
     }, dependencies) // eslint-disable-line
 
-    return (
+    return {
         data,
         error,
         loading
-    )
+    }
+    
 
 }
 
