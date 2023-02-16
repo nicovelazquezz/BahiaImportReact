@@ -1,17 +1,20 @@
-// import { getProducts, getProductsByCategory } from "../../asyncMock";
 import ItemList from "../ItemList/ItemList";
 import { useParams } from "react-router-dom";
 import { useAsync } from "../../hooks/useAsync";
+import { useTitle } from '../../hooks/useTitle'
 import { getProducts } from "../../services/firebase/firestore/products";
 
 
 function ItemListContainer({greeting}) {
+    
     const { categoryId } = useParams();
-
+    
     const getProductsWithCategory = () => getProducts(categoryId)    
-
+    
     // Estoy renombrando data como products
     const { data: products, error, loading } = useAsync(getProductsWithCategory, [categoryId])
+    
+    useTitle('Todos los productos', [])
 
     if(loading) {
         return <h1>Cargando productos...</h1>
