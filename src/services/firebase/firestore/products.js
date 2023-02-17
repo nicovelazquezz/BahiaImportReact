@@ -1,4 +1,4 @@
-import { getDocs, collection, query, where } from "firebase/firestore";
+import { getDoc, doc, getDocs, collection, query, where } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 
 export const getProducts = (categoryId) => {
@@ -15,6 +15,20 @@ export const getProducts = (categoryId) => {
             })
 
             resolve(productsAdapted)
+        }).catch(error => {
+            reject(error)
+        })
+    })
+}
+
+export const getProductsById = (productId) => {
+    return new Promise((resolve, reject) => {
+        const docRef = doc(db, 'products', productId)
+        getDoc(docRef).then(doc => {
+            const dataProduct = doc.data()
+            const productsAdapted = { id: doc.id, ...dataProduct}
+            
+            resolve(productsAdapted) 
         }).catch(error => {
             reject(error)
         })

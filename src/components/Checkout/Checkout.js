@@ -19,87 +19,15 @@ function Checkout() {
       postalCode: ""
     }
   });
-  
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [country, setCountry] = useState("");
-  const [postalCode, setPostalCode] = useState("");
 
-  function handleNameChange(event) {
-    setName(event.target.value);
+  function handleInputChange(event) {
+    const { name, value } = event.target;
     setObjOrder(prevState => {
       return {
         ...prevState,
         buyer: {
           ...prevState.buyer,
-          name: event.target.value
-        }
-      }
-    });
-  }
-  
-  function handleEmailChange(event) {
-    setEmail(event.target.value);
-    setObjOrder(prevState => {
-      return {
-        ...prevState,
-        buyer: {
-          ...prevState.buyer,
-          email: event.target.value
-        }
-      }
-    });
-  }
-  
-  function handleAddressChange(event) {
-    setAddress(event.target.value);
-    setObjOrder(prevState => {
-      return {
-        ...prevState,
-        buyer: {
-          ...prevState.buyer,
-          address: event.target.value
-        }
-      }
-    });
-  }
-  
-  function handleCityChange(event) {
-    setCity(event.target.value);
-    setObjOrder(prevState => {
-      return {
-        ...prevState,
-        buyer: {
-          ...prevState.buyer,
-          city: event.target.value
-        }
-      }
-    });
-  }
-  
-  function handleCountryChange(event) {
-    setCountry(event.target.value);
-    setObjOrder(prevState => {
-      return {
-        ...prevState,
-        buyer: {
-          ...prevState.buyer,
-          country: event.target.value
-        }
-      }
-    });
-  }
-  
-  function handlePostalCodeChange(event) {
-    setPostalCode(event.target.value);
-    setObjOrder(prevState => {
-      return {
-        ...prevState,
-        buyer: {
-          ...prevState.buyer,
-          postalCode: event.target.value
+          [name]: value
         }
       }
     });
@@ -110,59 +38,52 @@ function Checkout() {
   const createOrder = async () => {
     setLoading(true);
     try {
-      const objOrder = {
-        buyer: {
-          name,
-          email,
-          address,
-          city,
-          country,
-          postalCode
-        },
+      const order = {
+        ...objOrder,
         items: cart,
         total,
       };
             
       const batch = writeBatch(db);
-
+  
       const ids = cart.map((prod) => prod.id);
-
+  
       const productsRef = query(
         collection(db, "products"),
         where(documentId(), "in", ids)
       );
-
+  
       const productsAddedToCartFromFirestore = await getDocs(productsRef);
       const { docs } = productsAddedToCartFromFirestore;
-
+  
       const outOfStock = [];
-
+  
       docs.forEach((doc) => {
         const dataDoc = doc.data();
         const stockDb = dataDoc.stock;
-
+  
         const productAddedToCart = cart.find((prod) => prod.id === doc.id);
         const prodQuantity = productAddedToCart.quantity;
-
+  
         if (stockDb >= prodQuantity) {
           batch.update(doc.ref, { stock: stockDb - prodQuantity });
         } else {
           outOfStock.push({ id: doc.id, ...dataDoc });
         }
       });
-
+  
       if (outOfStock.length === 0) {
         await batch.commit();
         const orderRef = collection(db, "orders");
-
-        const orderAdded = await addDoc(orderRef, objOrder);
-
+  
+        const orderAdded = await addDoc(orderRef, order);
+  
         const { id } = orderAdded;
-
+  
         setOrderId(id);
-
+  
         clearCart();
-
+  
         setTimeout(() => {
           navigate("/");
         }, 5000);
@@ -210,7 +131,7 @@ function Checkout() {
                   placeholder="Ingresá tu nombre"
                   aria-label="Name"
                   value={objOrder.buyer.name}
-                  onChange={handleNameChange}
+                  onChange={handleInputChange}
                 />
               </div>
               <div className="mt-2">
@@ -226,7 +147,7 @@ function Checkout() {
                   placeholder="Ingresá tu email"
                   aria-label="Email"
                   value={objOrder.buyer.email}
-                  onChange={handleEmailChange}
+                  onChange={handleInputChange}
                 />
               </div>
               <div className="mt-2">
@@ -242,7 +163,7 @@ function Checkout() {
                   placeholder="Direccíon"
                   aria-label="adress"
                   value={objOrder.buyer.adress}
-                  onChange={handleAddressChange}
+                  onChange={handleInputChange}
                 />
               </div>
               <div className="mt-2">
@@ -258,7 +179,7 @@ function Checkout() {
                   placeholder="Ciudad"
                   aria-label="city"
                   value={objOrder.buyer.city}
-                  onChange={handleCityChange}
+                  onChange={handleInputChange}
                 />
               </div>
               <div className="inline-block mt-2 w-1/2 pr-1">
@@ -274,7 +195,7 @@ function Checkout() {
                   placeholder="País"
                   aria-label="country"
                   value={objOrder.buyer.country}
-                  onChange={handleCountryChange}
+                  onChange={handleInputChange}
                 />
               </div>
               <div className="inline-block mt-2 -mx-1 pl-1 w-1/2">
@@ -290,7 +211,7 @@ function Checkout() {
                   placeholder="Código postal"
                   aria-label="zip"
                   value={objOrder.buyer.postalCode}
-                  onChange={handlePostalCodeChange}
+                  onChange={handleInputChange}
                 />
               </div>
               <p className="mt-4 text-gray-800 font-medium">
