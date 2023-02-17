@@ -1,7 +1,7 @@
 import ItemList from "../ItemList/ItemList";
 import { useParams } from "react-router-dom";
 import { useAsync } from "../../hooks/useAsync";
-import { useTitle } from '../../hooks/useTitle'
+import { useTitle }  from '../../hooks/useTitle'
 import { getProducts } from "../../services/firebase/firestore/products";
 
 
@@ -14,7 +14,10 @@ function ItemListContainer({greeting}) {
     // Estoy renombrando data como products
     const { data: products, error, loading } = useAsync(getProductsWithCategory, [categoryId])
     
-    useTitle('Todos los productos', [])
+    const defaultCategoryId = ''; // Valor predeterminado para categoryId si es nulo
+    const categoryIdToUse = categoryId ? " - " + categoryId : defaultCategoryId;
+
+    useTitle('Bahia import' + categoryIdToUse, [categoryIdToUse]);
 
     if(loading) {
         return <h1>Cargando productos...</h1>
