@@ -1,16 +1,19 @@
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { CartContext } from '../../context/CartContext'
+import { useNavigate } from "react-router-dom";
 import Counter from './Counter'
 
 
 function ItemCount({ stock, product }) {
-
+  
   const { name, price, id, img, category} = product
-
+  
   const [ goToCart, setGoToCart ]= useState(false)
-
+  
   const { quantity, setCart, setCount, cart, count } = useContext(CartContext);
+  
+  const navigate = useNavigate();
 
   
   const agregarProductoAlCarrito = (product, cart, setCart) => {
@@ -25,8 +28,7 @@ function ItemCount({ stock, product }) {
         } else {
           return prod;
         }
-      });
-  
+      });  
       setCart(newCart);      
     } else {
       // Si el producto no está en el carrito, agregarlo
@@ -34,14 +36,15 @@ function ItemCount({ stock, product }) {
       setCount(1)  
     }
   }
-  
-  
 
   
   const handleFinish = () => {
     console.log('si')
   }
-  
+
+  useEffect(() => {
+    setCount(1);
+  }, [navigate]); // eslint-disable-line
 
   return (
     <>

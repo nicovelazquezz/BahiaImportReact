@@ -15,7 +15,7 @@ function Cart() {
     const newCart = cart.filter((prod) => prod.id !== idProductoAEliminar);
     setCart(newCart);
   };
- 
+
 
   if (cart.length === 0) {
     return <h1>No hay productos en el carrito</h1>;
@@ -58,13 +58,13 @@ function Cart() {
             <div className="mt-5 flex justify-between">
               <Link
                 to="/"
-                className="flex font-semibold text-indigo-600 text-sm mt-10 "
+                className="flex p-1 font-semibold border border-indigo-500 rounded-md border-opacity-50 text-indigo-500 text-sm mt-7 hover:text-indigo-600"
               >
                 Continuar Comprando
               </Link>
               <button
                 onClick={clearCart}
-                className="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase"
+                className="bg-red-500 hover:bg-red-600 px-4 text-sm text-white uppercase"
               >
                 Limpiar Carrito
               </button>

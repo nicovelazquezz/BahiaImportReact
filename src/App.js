@@ -11,7 +11,7 @@ function App() {
 
 
   return (
-    <> 
+    <>     
       <CartProvider>
         <BrowserRouter>
           <NavBar />
@@ -23,8 +23,10 @@ function App() {
             <Route path='/checkout' element= { <Checkout /> } />
           </Routes>
         </BrowserRouter>
-      </CartProvider>      
-    </>
+        </CartProvider>      
+      
+    </>   
+    
   );
 }
 

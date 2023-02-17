@@ -7,7 +7,7 @@ export const AdaptedProductFromFirestore = (doc) => {
         img: data.img,
         full: data.full,
         price: data.price,
-        cateogory: data.category,
+        category: data.category,
         description: data.description
     }
 
