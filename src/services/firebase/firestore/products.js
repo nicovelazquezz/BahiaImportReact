@@ -1,5 +1,6 @@
 import { getDoc, doc, getDocs, collection, query, where } from "firebase/firestore";
 import { db } from "../firebaseConfig";
+import { AdaptedProductFromFirestore } from "../../../adapters/productAdapters";
 
 export const getProducts = (categoryId) => {
     return new Promise((resolve, reject)=>{
@@ -10,8 +11,7 @@ export const getProducts = (categoryId) => {
 
         getDocs(collectionRef).then(response => {
             const productsAdapted = response.docs.map( doc => {
-                const data = doc.data()
-                return { id: doc.id, ...data }
+                return AdaptedProductFromFirestore(doc)
             })
 
             resolve(productsAdapted)
@@ -25,9 +25,8 @@ export const getProductsById = (productId) => {
     return new Promise((resolve, reject) => {
         const docRef = doc(db, 'products', productId)
         getDoc(docRef).then(doc => {
-            const dataProduct = doc.data()
-            const productsAdapted = { id: doc.id, ...dataProduct}
-            
+            const productsAdapted = AdaptedProductFromFirestore(doc)
+                        
             resolve(productsAdapted) 
         }).catch(error => {
             reject(error)
