@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { CartContext } from '../../context/CartContext'
 import { useNavigate } from "react-router-dom";
 import Counter from './Counter'
+import { addNotification } from '../../alerts/alerts';
 
 
 function ItemCount({ stock, product }) {
@@ -19,6 +20,8 @@ function ItemCount({ stock, product }) {
   const agregarProductoAlCarrito = (product, cart, setCart) => {
     // Verificar si el producto ya existe en el carrito
     const productoExistente = cart.find((prod) => prod.id === product.id);
+
+    addNotification()
   
     if (productoExistente) {
       // Si el producto ya está en el carrito, actualizar su cantidad

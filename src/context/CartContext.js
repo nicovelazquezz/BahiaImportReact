@@ -1,7 +1,6 @@
 import { createContext } from "react"
 import { useState, useEffect } from "react"
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
+import { limpiarCarritoAlert } from "../alerts/alerts"
 
 export const CartContext = createContext()
 
@@ -49,28 +48,8 @@ export function CartProvider({children}) {
     const totalQuantity = getTotalQuantity()
     const total = getTotal()
 
-    // Limpiar el carrito y mostrar un sweetAlert
-    const MySwal = withReactContent(Swal);
     const clearCart = () => {    
-        MySwal.fire({
-            title: '¿Estás seguro?',
-            text: 'Esta acción eliminará todos los productos del carrito.',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Sí, eliminar',
-            cancelButtonText: 'Cancelar',
-        }).then((result) => {
-            if (result.isConfirmed) {
-            setCart([])
-            MySwal.fire({
-                title: 'Carrito limpiado',
-                icon: 'success',
-            });
-            setTimeout(() => {
-                window.location.href = '/';                
-            }, 2000);
-            }
-        });
+        limpiarCarritoAlert(setCart);
     };
         
     
