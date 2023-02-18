@@ -2,10 +2,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'
 import { faBinoculars, faCartPlus, faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
+import { useContext } from 'react'
+import { CartContext } from '../../context/CartContext'
 
 function Item({prod}) {
 
     const {name, category, price, img, id} = prod 
+
+    const { agregarProductoAlCarrito } = useContext(CartContext);
+
     
     return (
         <>
@@ -14,7 +19,7 @@ function Item({prod}) {
                     <img className='block max-w-full h-auto mx-auto' src={img} alt="producto"/>                    
                     <span className = "heart-icon"><FontAwesomeIcon icon={farHeart}></FontAwesomeIcon></span>
 					<div className = "btns w-full mx-auto text-center">
-                    <button type="button" className = "w-2/4 py-2 agregar-carrito">
+                    <button onClick={() => agregarProductoAlCarrito(prod)} type="button" className = "w-2/4 py-2 agregar-carrito">
                         <FontAwesomeIcon icon={faCartPlus}></FontAwesomeIcon> Agregar al Carrito
                     </button>
                     <Link to={`/item/${id}`}>
