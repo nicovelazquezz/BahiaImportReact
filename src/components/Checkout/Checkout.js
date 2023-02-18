@@ -7,7 +7,7 @@ import { db } from "../../services/firebase/firebaseConfig";
 function Checkout() {
 
   const [loading, setLoading] = useState(false);
-  const { cart, total, clearCart } = useContext(CartContext);
+  const { cart, total, setCart } = useContext(CartContext);
   const [orderId, setOrderId] = useState("");
   const [objOrder, setObjOrder] = useState({
     buyer: {
@@ -82,7 +82,8 @@ function Checkout() {
   
         setOrderId(id);
   
-        clearCart();
+        setCart([])
+        
   
         setTimeout(() => {
           navigate("/");
