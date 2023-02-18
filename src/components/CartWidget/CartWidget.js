@@ -11,7 +11,7 @@ function CartWidget({totalQuantity}) {
 
     return (        
         <>
-            <Link to='/cart' className={"w-20 flex" + cartLinkClass}>
+            <Link to='/cart' className={"w-20 flex " + cartLinkClass}>
                 <img className="mr-4" src="https://i.ibb.co/JcPsZKQ/cart.png" alt="logo" /> 
                 <p className={"text-2xl text-white "+quantityClass}>{totalQuantity}</p> 
             </Link>

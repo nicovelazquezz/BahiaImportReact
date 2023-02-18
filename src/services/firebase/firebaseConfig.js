@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore"
+import { getFirestore, collection, addDoc } from "firebase/firestore"
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_apiKey,
@@ -12,4 +12,16 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-export const db = getFirestore(app)
+export const db = getFirestore(app);
+
+
+// CODIGO PARA AGREGAR PRODUCTOS A LA COLLECTION DESDE UN ARRAY
+// async function addProductsToFirestore() {
+//   const productsCollectionRef = collection(db, "products");
+
+//   for (const product of products) {
+//     await addDoc(productsCollectionRef, product);
+//   }
+// }
+
+// addProductsToFirestore();
