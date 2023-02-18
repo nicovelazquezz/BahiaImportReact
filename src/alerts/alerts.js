@@ -31,7 +31,7 @@ MySwal.fire({
     if (result.isConfirmed) {
     setCart([])
     MySwal.fire({
-        title: 'Carrito limpiado',
+        title: 'Carrito vacío.',
         icon: 'success',
     });
     setTimeout(() => {

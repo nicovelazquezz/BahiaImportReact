@@ -2,7 +2,7 @@
 
 // const products = [
 //         {
-//             id: '1',
+            
 //             name: 'Apple - Apple Watch Series 3 White Sports Band',
 //             category: 'Watch',
 //             price: 300,
@@ -12,7 +12,7 @@
 //             full: '../images/product-1-full.jpg'           
 //         },
 //         {
-//             id: '2',
+            
 //             name: 'Baseus - Wireless In-Ear Black Edition',
 //             category: 'Earphones',
 //             price: 200,
@@ -22,7 +22,7 @@
 //             full: '../images/product-2-full.jpg'  
 //         },
 //         {
-//             id: '3',
+            
 //             name: 'iPhone 13 Pro Max',
 //             category: 'Cellphone',
 //             price: 990,
@@ -32,7 +32,7 @@
 //             full: '../images/product-3-full.jpg'  
 //         },
 //         {
-//             id: '4',
+            
 //             name: 'GoPro - Camera GoPro Hero 7 Black',
 //             category: 'Camera',
 //             price: 750,
@@ -42,7 +42,7 @@
 //             full: '../images/product-4-full.jpg'  
 //         },
 //         {
-//             id: '5',
+            
 //             name: 'Apple Watch Series 8',
 //             category: 'Watch',
 //             price: 750,
@@ -52,7 +52,7 @@
 //             full: '../images/product-5-full.jpg'  
 //         },
 //         {
-//             id: '6',
+            
 //             name: 'Minor III * Marshall',
 //             category: 'Earphones',
 //             price: 300,
@@ -62,7 +62,7 @@
 //             full: '../images/product-6-full.jpg' 
 //         },
 //         {
-//             id: '7',
+            
 //             name: 'iPhone 14 Pro Max ',
 //             category: 'Cellphone',
 //             price: 1500,
@@ -72,7 +72,7 @@
 //             full: '../images/product-7-full.jpg'  
 //         },
 //         {
-//             id: '8',
+            
 //             name: 'Sony Alpha ZV-E10',
 //             category: 'Camera',
 //             price: 1750,
@@ -92,18 +92,18 @@
 //     })
 // }
 
-// export const getProductsByCategory = (categoryId) => {
+// export const getProductsByCategory = (category) => {
 //     return new Promise((resolve) => {
 //         setTimeout(() => {
-//             resolve(products.filter(prod => prod.category === categoryId))
+//             resolve(products.filter(prod => prod.category === category))
 //         }, 500)
 //     })
 // }
 
-// export const getProductById = (id) => {
+// export const getProductBy = () => {
 //     return new Promise((resolve) => {
 //         setTimeout(() => {
-//             resolve(products.find(prod => prod.id === id))            
+//             resolve(products.find(prod => prod. === ))            
 //         }, 500)
 //     })
 // }
