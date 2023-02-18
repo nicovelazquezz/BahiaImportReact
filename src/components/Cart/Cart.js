@@ -16,11 +16,6 @@ function Cart() {
     setCart(newCart);
   };
 
-
-  if (cart.length === 0) {
-    return <h1>No hay productos en el carrito</h1>;
-  }
-
   return (
     <>
       <div className="container mx-auto mt-10">
