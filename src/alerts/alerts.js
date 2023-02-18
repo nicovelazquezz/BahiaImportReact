@@ -4,7 +4,10 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
 export const addNotification = () => toast.success('Agregado al carrito!', {
-    position: "top-right",
+    style: {
+        top: '4em',
+        right: '-5.5em'
+    },
     autoClose: 1000,
     hideProgressBar: true,
     closeOnClick: true,

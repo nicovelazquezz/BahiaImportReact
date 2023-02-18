@@ -26,7 +26,7 @@ function App() {
           </Routes>
         </BrowserRouter>
         </CartProvider>      
-        <ToastContainer />
+        <ToastContainer newestOnTop />
     </>   
     
   );
