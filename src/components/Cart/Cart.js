@@ -15,6 +15,12 @@ function Cart() {
     const newCart = cart.filter((prod) => prod.id !== idProductoAEliminar);
     setCart(newCart);
   };
+  
+  if(cart.length === 0){
+    setTimeout(() => {
+      window.location.href = '/';                
+  }, 1000);
+  }
 
   return (
     <>

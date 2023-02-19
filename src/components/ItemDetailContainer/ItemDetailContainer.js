@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { getProductsById } from "../../services/firebase/firestore/products";
 import { useTitle }  from '../../hooks/useTitle'
 import { useAsync } from "../../hooks/useAsync";
+import Spinner from "../../alerts/Spinner";
 
 
 function ItemDetailContainer() {
@@ -18,7 +19,7 @@ function ItemDetailContainer() {
     }
 
   if (loading) {
-    return <div className="block rounded bg-green-500 text-center text-3xl mx-3 mt-2 pt-1 pb-2 text-gray-200">Cargando...</div>
+    return <Spinner/>
   }
 
   return (
