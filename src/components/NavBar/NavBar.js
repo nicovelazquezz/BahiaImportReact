@@ -17,7 +17,7 @@ function NavBar() {
             <div id='menu' className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
                 <div className="text-sm lg:flex-grow flex justify-center">
                     <Link to="/category/Cellphone" className="block leading-none border rounded px-4 py-2 text-xl mt-4 lg:inline-block mr-4 lg:mt-0 text-gray-500 hover:text-gray-400 hover:bg-gray-600">
-                        Celulares
+                        Celularessssss
                     </Link>
                     <Link to="/category/Watch" className="block leading-none border rounded px-4 py-2 text-xl mt-4 lg:inline-block mr-4 lg:mt-0 text-gray-500 hover:text-gray-400 hover:bg-gray-600">
                         Smartwatchs
