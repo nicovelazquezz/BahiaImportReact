@@ -1,6 +1,6 @@
 import { getDoc, doc, getDocs, collection, query, where } from "firebase/firestore";
-import { db } from "../firebaseConfig";
 import { AdaptedProductFromFirestore } from "../../../adapters/productAdapters";
+import { db } from "../firebaseConfig";
 
 export const getProducts = (categoryId) => {
     return new Promise((resolve, reject)=>{
